@@ -10,7 +10,11 @@ namespace TechShop.dao
     public interface ICustomerService
     {
         bool RegisterCustomer(Customers customer);
+
+        bool UpdateCustomer(int customerId, Dictionary<string, object> updates);
+
         int CalculateTotalOrders(int customerId);
+        
         List<Customers> GetCustomerDetails();
 
         bool DeleteCustomer(int customerId);

@@ -1,11 +1,12 @@
 ﻿using System;
 using TechShop.dao;
 using TechShop.Models;
+using TechShop.Mainmodule;
 namespace TechShop
 {
     public  class Program
     {
-        static void Main(string[] args)
+      public  static void Main(string[] args)
         {
             #region  1 question
             //    Console.WriteLine("Enter the loyal points:");
@@ -133,7 +134,7 @@ namespace TechShop
             #endregion
 
 
-            TechShopManagement module = new TechShopManagement();
+            TechShopManagementMenu module = new TechShopManagementMenu();
             module.Run();
 
 

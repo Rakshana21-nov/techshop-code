@@ -10,10 +10,11 @@ namespace TechShop.Models
 {
     public  class Products
     {
-        int productId;
-        string productName;
-        string description;
-        decimal price;
+     public  int productId;
+     public  string productName;
+     public string category;
+     public  string description;
+     public   decimal price;
 
 
         public Products()
@@ -21,10 +22,11 @@ namespace TechShop.Models
 
         }
 
-        public Products(int p_id, string p_name, string p_description, decimal p_price)
+        public Products(int p_id, string p_name,string p_category,string  p_description, decimal p_price)
         {
             productId = p_id;
             productName = p_name;
+            category = p_category;
             description = p_description;
             price = p_price;
 

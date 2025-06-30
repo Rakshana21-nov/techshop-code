@@ -109,6 +109,61 @@ namespace TechShop.dao
 
            
         }
+
+
+        public bool UpdateCustomer(int customerId, Dictionary<string, object> updates)
+        {
+            if (updates == null || updates.Count == 0)
+                return false;
+
+            using (SqlConnection sqlConnection = DBConnUtil.GetConnectionObject())
+            {
+                sqlConnection.Open();
+
+                // Step 1: Check if customer exists
+                string checkQuery = "SELECT COUNT(*) FROM customers WHERE CustomerID = @id";
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, sqlConnection))
+                {
+                    checkCmd.Parameters.AddWithValue("@id", customerId);
+                    int count = (int)checkCmd.ExecuteScalar();
+
+                    try
+                    {
+                        if (count == 0)
+                            throw new Exception($"Customer with ID {customerId} does not exist.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error: {ex.Message}");
+                        return false;
+                    }
+                }
+
+                // Step 2: Build dynamic update query
+                List<string> setClauses = new List<string>();
+                foreach (var key in updates.Keys)
+                {
+                    setClauses.Add($"{key} = @{key}");
+                }
+
+                string setClause = string.Join(", ", setClauses);
+                string query = $"UPDATE customers SET {setClause} WHERE CustomerID = @customerId";
+
+                using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
+                {
+                    // Add update values
+                    foreach (var kvp in updates)
+                    {
+                        cmd.Parameters.AddWithValue("@" + kvp.Key, kvp.Value);
+                    }
+
+                    cmd.Parameters.AddWithValue("@customerId", customerId);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+        }
         public bool DeleteCustomer(int customerId)
         {
             

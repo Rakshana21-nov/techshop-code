@@ -11,10 +11,10 @@ namespace TechShop.Models
 { 
     public class Orderdetails
         {
-        private int orderDetailID;
-        private Orders order;
-        private Products product;
-        private int quantity;
+        public int orderDetailID;
+        public Orders order;
+        public Products product;
+        public int quantity;
 
         public Orderdetails()
         {

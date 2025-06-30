@@ -8,35 +8,40 @@ namespace TechShop.Models
 {
     public  class Orders
     {
-        int orderID
+       public int orderID
         {
             get; set;
 
         }
 
-        Customers customer // Composition: Has-A relationship
+      public  Customers customer // Composition: Has-A relationship
         {
             get; set;
         }
-        DateTime orderDate
+       public DateTime orderDate
         {
             get; set;
         }
-        decimal totalAmount
+       public decimal totalAmount
         {
             get; set;
+        }
+        public string status
+        {
+            get;set;
         }
 
         public Orders()
         {
 
         }
-        public Orders(int id, Customers cust, DateTime date, decimal amount)
+        public Orders(int id, Customers cust, DateTime date, decimal amount,string order_status)
         {
             orderID = id;
             customer = cust;
             orderDate = date;
             totalAmount = amount;
+            status = order_status;
         }
 
         
